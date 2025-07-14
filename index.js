@@ -6,11 +6,10 @@ const session = require("express-session");
 require("./config/connection"); // Ensure this file connects to MongoDB
 const userrouter = require("./routes/userRoutes");
 const adminrouter = require("./routes/adminRoutes");
+const shoprouter = require("./routes/shopRoutes.js");
 const cookieParser = require("cookie-parser");
 
-var origin = [
-  "http://localhost:3000",
-]; // Allow only your frontend URL
+var origin = ["http://localhost:3000"]; // Allow only your frontend URL
 app.use(
   cors({
     origin: origin,
@@ -33,6 +32,7 @@ const ErorrHandler = require("./utils/ErrorHandler");
 const { genetatedErrors } = require("./middleware/errors");
 app.use("/api/", userrouter);
 app.use("/api/admin", adminrouter);
+app.use("/api/shop", shoprouter);
 
 app.use("/sorry", async (req, res) => {
   setTimeout(() => {
@@ -45,7 +45,6 @@ app.all("*", (req, res, next) => {
   next(new ErorrHandler(`Requested URL Not Found ${req.url}`, 404));
 });
 app.use(genetatedErrors);
-
 
 const PORT = process.env.PORT || 4000;
 
