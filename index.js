@@ -9,7 +9,7 @@ const adminrouter = require("./routes/adminRoutes");
 const shoprouter = require("./routes/shopRoutes.js");
 const cookieParser = require("cookie-parser");
 
-var origin = ["http://localhost:3000"]; // Allow only your frontend URL
+var origin = ["http://localhost:3000","https://b4-mart.vercel.app"]; // Allow only your frontend URL
 app.use(
   cors({
     origin: origin,
